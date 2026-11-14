@@ -1,0 +1,10 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": {
+    "item": "minecraft:torchflower"
+  },
+  "result": {
+    "id": "minecraft:orange_dye",
+    "count": 2
+  }
+}

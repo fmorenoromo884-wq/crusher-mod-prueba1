@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "crusher:block/crusher"
+    },
+    "lit=true": {
+      "model": "crusher:block/crusher"
+    }
+  }
+}

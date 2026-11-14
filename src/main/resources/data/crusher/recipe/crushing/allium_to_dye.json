@@ -1,0 +1,10 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": {
+    "item": "minecraft:allium"
+  },
+  "result": {
+    "id": "minecraft:magenta_dye",
+    "count": 2
+  }
+}

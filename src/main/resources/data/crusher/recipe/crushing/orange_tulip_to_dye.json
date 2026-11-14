@@ -1,0 +1,10 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": {
+    "item": "minecraft:orange_tulip"
+  },
+  "result": {
+    "id": "minecraft:orange_dye",
+    "count": 2
+  }
+}

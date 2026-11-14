@@ -1,0 +1,10 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": {
+    "item": "minecraft:bone"
+  },
+  "result": {
+    "id": "minecraft:bone_meal",
+    "count": 4
+  }
+}
