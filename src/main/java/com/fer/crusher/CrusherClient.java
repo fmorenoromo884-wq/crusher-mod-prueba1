@@ -7,7 +7,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@EventBusSubscriber(modid = CrusherMod.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = CrusherMod.MODID, value = Dist.CLIENT)
 public class CrusherClient {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
