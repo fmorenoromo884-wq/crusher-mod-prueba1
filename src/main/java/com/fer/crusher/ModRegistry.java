@@ -36,7 +36,9 @@ public class ModRegistry {
                     .strength(3.5F)
                     .sound(SoundType.WOOD)
                     .requiresCorrectToolForDrops()
-                    .noOcclusion()));
+                    .noOcclusion()
+                    // No transmite señal de redstone a su alrededor (así no bloquea las tolvas vecinas)
+                    .isRedstoneConductor((state, level, pos) -> false)));
 
     public static final DeferredItem<BlockItem> CRUSHER_ITEM = ITEMS.registerSimpleBlockItem("crusher", CRUSHER_BLOCK);
 

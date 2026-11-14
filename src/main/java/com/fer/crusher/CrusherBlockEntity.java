@@ -35,7 +35,7 @@ import java.util.Optional;
 
 public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     public static final int CRUSH_TIME = 100;      // 5 segundos
-    public static final int EFFECT_INTERVAL = 10;  // 0.5 segundos
+    public static final int EFFECT_INTERVAL = 4;   // 0.2 segundos (cambia a 6 para 0.3 s)
     private static final int SLOT_INPUT = 0;
     private static final int SLOT_OUTPUT = 1;
 
@@ -68,9 +68,9 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int tickCounter = 0;
 
-    /** Solo cliente: ángulo del rodillo para el renderer. */
-    public float rollerAngle = 0f;
-    public static final float ROLLER_SPEED = 15f; // grados por tick
+    /** Solo cliente: ángulo de la rueda para el renderer. */
+    public float wheelAngle = 0f;
+    public static final float WHEEL_SPEED = 6f; // grados por tick
 
     public final ContainerData data = new ContainerData() {
         @Override public int get(int index) { return index == 0 ? progress : CRUSH_TIME; }
@@ -147,7 +147,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, CrusherBlockEntity be) {
         if (state.getValue(CrusherBlock.LIT)) {
-            be.rollerAngle = (be.rollerAngle + ROLLER_SPEED) % 360f;
+            be.wheelAngle = (be.wheelAngle + WHEEL_SPEED) % 360f;
         }
     }
 
@@ -172,17 +172,17 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         if (input.getItem() instanceof BlockItem bi) {
             hit = bi.getBlock().defaultBlockState().getSoundType().getHitSound();
         }
-        level.playSound(null, pos, hit, SoundSource.BLOCKS, 0.7F, 0.75F);
+        level.playSound(null, pos, hit, SoundSource.BLOCKS, 0.5F, 0.6F + level.random.nextFloat() * 0.3F);
 
         // Partículas de ruptura del ítem exacto, hacia arriba
         if (level instanceof ServerLevel sl) {
             ItemParticleOption opt = new ItemParticleOption(ParticleTypes.ITEM, input.copyWithCount(1));
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 4; i++) {
                 double dx = (level.random.nextDouble() - 0.5) * 0.12;
                 double dz = (level.random.nextDouble() - 0.5) * 0.12;
                 sl.sendParticles(opt,
                         pos.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 0.5,
-                        pos.getY() + 0.95,
+                        pos.getY() + 0.8,
                         pos.getZ() + 0.5 + (level.random.nextDouble() - 0.5) * 0.5,
                         0, dx, 0.22, dz, 1.0);
             }
@@ -205,7 +205,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
         // 2) Ítems tirados encima
-        AABB box = new AABB(pos.getX(), pos.getY() + 1.0, pos.getZ(), pos.getX() + 1.0, pos.getY() + 1.5, pos.getZ() + 1.0);
+        AABB box = new AABB(pos.getX(), pos.getY() + 0.7, pos.getZ(), pos.getX() + 1.0, pos.getY() + 1.5, pos.getZ() + 1.0);
         for (ItemEntity ie : level.getEntitiesOfClass(ItemEntity.class, box, Entity::isAlive)) {
             ItemStack stack = ie.getItem();
             ItemStack remainder = inventory.insertItem(SLOT_INPUT, stack.copy(), false);

@@ -21,6 +21,6 @@ public class CrusherClient {
 
     @SubscribeEvent
     public static void registerModels(ModelEvent.RegisterAdditional event) {
-        event.register(CrusherRenderer.ROLLER_MODEL);
+        event.register(CrusherRenderer.WHEEL_MODEL);
     }
 }

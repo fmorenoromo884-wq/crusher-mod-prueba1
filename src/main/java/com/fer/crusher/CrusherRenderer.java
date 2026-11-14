@@ -11,10 +11,10 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 
-/** Dibuja el rodillo dentado (models/block/crusher_roller.json) girando sobre el eje X. */
+/** Dibuja la rueda de molino (models/block/crusher_wheel.json) girando sobre el eje vertical. */
 public class CrusherRenderer implements BlockEntityRenderer<CrusherBlockEntity> {
-    public static final ModelResourceLocation ROLLER_MODEL = ModelResourceLocation.standalone(
-            ResourceLocation.fromNamespaceAndPath(CrusherMod.MODID, "block/crusher_roller"));
+    public static final ModelResourceLocation WHEEL_MODEL = ModelResourceLocation.standalone(
+            ResourceLocation.fromNamespaceAndPath(CrusherMod.MODID, "block/crusher_wheel"));
 
     public CrusherRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -23,16 +23,16 @@ public class CrusherRenderer implements BlockEntityRenderer<CrusherBlockEntity> 
     public void render(CrusherBlockEntity be, float partialTick, PoseStack pose, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         Minecraft mc = Minecraft.getInstance();
-        BakedModel model = mc.getModelManager().getModel(ROLLER_MODEL);
+        BakedModel model = mc.getModelManager().getModel(WHEEL_MODEL);
 
         boolean lit = be.getBlockState().getValue(CrusherBlock.LIT);
-        float angle = be.rollerAngle + (lit ? partialTick * CrusherBlockEntity.ROLLER_SPEED : 0f);
+        float angle = be.wheelAngle + (lit ? partialTick * CrusherBlockEntity.WHEEL_SPEED : 0f);
 
         pose.pushPose();
-        // Centro del rodillo en el modelo: (8, 12, 8) / 16
-        pose.translate(0.5, 0.75, 0.5);
-        pose.mulPose(Axis.XP.rotationDegrees(angle));
-        pose.translate(-0.5, -0.75, -0.5);
+        // La rueda gira sobre el centro del bloque (8, y, 8) en el eje Y
+        pose.translate(0.5, 0.0, 0.5);
+        pose.mulPose(Axis.YP.rotationDegrees(angle));
+        pose.translate(-0.5, 0.0, -0.5);
         mc.getBlockRenderer().getModelRenderer().renderModel(
                 pose.last(), buffer.getBuffer(RenderType.cutout()), null, model,
                 1f, 1f, 1f, packedLight, packedOverlay);

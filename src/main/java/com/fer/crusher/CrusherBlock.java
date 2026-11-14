@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -18,12 +19,20 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CrusherBlock extends BaseEntityBlock {
     public static final MapCodec<CrusherBlock> CODEC = simpleCodec(CrusherBlock::new);
     /** true mientras está triturando (hay redstone + receta + espacio de salida) */
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
+    // Base (1..15 px, hasta 6 px de alto) + cuenca superior (0.5..15.5 px, hasta 12 px)
+    private static final VoxelShape SHAPE = Shapes.or(
+            Block.box(1, 0, 1, 15, 6, 15),
+            Block.box(0.5, 6, 0.5, 15.5, 12, 15.5));
 
     public CrusherBlock(Properties properties) {
         super(properties);
@@ -38,6 +47,11 @@ public class CrusherBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LIT);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override
