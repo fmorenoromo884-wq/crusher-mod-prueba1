@@ -35,7 +35,7 @@ import java.util.Optional;
 
 public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
     public static final int CRUSH_TIME = 100;      // 5 segundos
-    public static final int EFFECT_INTERVAL = 4;   // 0.2 segundos (cambia a 6 para 0.3 s)
+    public static final int EFFECT_INTERVAL = 10;  // 0.5 segundos
     private static final int SLOT_INPUT = 0;
     private static final int SLOT_OUTPUT = 1;
 
@@ -127,7 +127,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
                 be.progress = 0;
                 be.setChanged();
             }
-        } else if (level.hasNeighborSignal(pos) && be.canOutput(recipe.get().value().getResult())) {
+        } else if (be.canOutput(recipe.get().value().getResult())) {
             active = true;
             be.progress++;
             if (be.progress % EFFECT_INTERVAL == 0) {
@@ -138,7 +138,7 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
                 be.finishCrush(recipe.get().value());
             }
         }
-        // Si no hay redstone (o no hay espacio) el progreso simplemente se queda pausado.
+        // Si la salida está llena, el progreso se queda pausado (y la rueda se detiene).
 
         if (state.getValue(CrusherBlock.LIT) != active) {
             level.setBlock(pos, state.setValue(CrusherBlock.LIT, active), 3);
@@ -172,12 +172,12 @@ public class CrusherBlockEntity extends BlockEntity implements MenuProvider {
         if (input.getItem() instanceof BlockItem bi) {
             hit = bi.getBlock().defaultBlockState().getSoundType().getHitSound();
         }
-        level.playSound(null, pos, hit, SoundSource.BLOCKS, 0.5F, 0.6F + level.random.nextFloat() * 0.3F);
+        level.playSound(null, pos, hit, SoundSource.BLOCKS, 0.7F, 0.6F + level.random.nextFloat() * 0.3F);
 
         // Partículas de ruptura del ítem exacto, hacia arriba
         if (level instanceof ServerLevel sl) {
             ItemParticleOption opt = new ItemParticleOption(ParticleTypes.ITEM, input.copyWithCount(1));
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 8; i++) {
                 double dx = (level.random.nextDouble() - 0.5) * 0.12;
                 double dz = (level.random.nextDouble() - 0.5) * 0.12;
                 sl.sendParticles(opt,

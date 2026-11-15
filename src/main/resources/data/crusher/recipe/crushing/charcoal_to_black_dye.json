@@ -1,0 +1,12 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": [
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "result": {
+    "id": "minecraft:black_dye",
+    "count": 2
+  }
+}

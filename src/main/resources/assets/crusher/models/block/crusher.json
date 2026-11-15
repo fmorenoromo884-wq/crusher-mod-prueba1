@@ -2,15 +2,15 @@
   "parent": "minecraft:block/block",
   "textures": {
     "particle": "#wood",
-    "wood": "minecraft:block/dark_oak_planks",
+    "wood": "crusher:block/crusher_planks",
+    "lip": "crusher:block/crusher_lip",
     "cobble": "minecraft:block/cobblestone",
-    "bricks": "minecraft:block/stone_bricks",
-    "lip": "minecraft:block/stripped_dark_oak_log",
-    "liptop": "minecraft:block/stripped_dark_oak_log_top",
     "iron": "crusher:block/crusher_iron",
     "bed": "crusher:block/crusher_bed",
     "wtop": "crusher:block/crusher_wheel_top",
-    "wside": "crusher:block/crusher_wheel_side"
+    "wside": "crusher:block/crusher_wheel_side",
+    "wtooth": "crusher:block/crusher_wheel_tooth",
+    "axle": "crusher:block/crusher_axle"
   },
   "elements": [
     {
@@ -58,22 +58,22 @@
       ],
       "faces": {
         "north": {
-          "texture": "#bricks"
+          "texture": "#cobble"
         },
         "east": {
-          "texture": "#bricks"
+          "texture": "#cobble"
         },
         "south": {
-          "texture": "#bricks"
+          "texture": "#cobble"
         },
         "west": {
-          "texture": "#bricks"
+          "texture": "#cobble"
         },
         "up": {
-          "texture": "#bricks"
+          "texture": "#cobble"
         },
         "down": {
-          "texture": "#bricks"
+          "texture": "#cobble"
         }
       }
     },
@@ -262,10 +262,10 @@
           "texture": "#lip"
         },
         "up": {
-          "texture": "#liptop"
+          "texture": "#lip"
         },
         "down": {
-          "texture": "#liptop"
+          "texture": "#lip"
         }
       }
     },
@@ -294,10 +294,10 @@
           "texture": "#lip"
         },
         "up": {
-          "texture": "#liptop"
+          "texture": "#lip"
         },
         "down": {
-          "texture": "#liptop"
+          "texture": "#lip"
         }
       }
     },
@@ -326,10 +326,10 @@
           "texture": "#lip"
         },
         "up": {
-          "texture": "#liptop"
+          "texture": "#lip"
         },
         "down": {
-          "texture": "#liptop"
+          "texture": "#lip"
         }
       }
     },
@@ -358,10 +358,10 @@
           "texture": "#lip"
         },
         "up": {
-          "texture": "#liptop"
+          "texture": "#lip"
         },
         "down": {
-          "texture": "#liptop"
+          "texture": "#lip"
         }
       }
     },

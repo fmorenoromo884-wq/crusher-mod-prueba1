@@ -1,0 +1,12 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": [
+    {
+      "item": "minecraft:honeycomb_block"
+    }
+  ],
+  "result": {
+    "id": "minecraft:honeycomb",
+    "count": 4
+  }
+}

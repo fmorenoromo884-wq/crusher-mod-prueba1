@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CrusherBlock extends BaseEntityBlock {
     public static final MapCodec<CrusherBlock> CODEC = simpleCodec(CrusherBlock::new);
-    /** true mientras está triturando (hay redstone + receta + espacio de salida) */
+    /** true mientras está triturando (hay ítem con receta y espacio en la salida) */
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     // Base (1..15 px, hasta 6 px de alto) + cuenca superior (0.5..15.5 px, hasta 12 px)

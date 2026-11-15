@@ -1,0 +1,12 @@
+{
+  "type": "crusher:crushing",
+  "ingredient": [
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
+  "result": {
+    "id": "minecraft:sand",
+    "count": 1
+  }
+}

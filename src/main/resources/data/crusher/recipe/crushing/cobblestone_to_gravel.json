@@ -1,8 +1,13 @@
 {
   "type": "crusher:crushing",
-  "ingredient": {
-    "item": "minecraft:cobblestone"
-  },
+  "ingredient": [
+    {
+      "item": "minecraft:cobblestone"
+    },
+    {
+      "item": "minecraft:mossy_cobblestone"
+    }
+  ],
   "result": {
     "id": "minecraft:gravel",
     "count": 1
