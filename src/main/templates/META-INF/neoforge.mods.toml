@@ -46,7 +46,7 @@ authors="Fer"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Adds a single block, the Crusher, that processes vanilla items (Vanilla+).
+Adds a single block, the Millstone, that processes vanilla items (Vanilla+).
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
